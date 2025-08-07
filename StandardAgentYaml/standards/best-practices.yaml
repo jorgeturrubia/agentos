@@ -1,0 +1,196 @@
+---
+title: Development Best Practices
+description: Global development guidelines for Agent OS projects
+version: 2.0
+strict_mode: true
+---
+
+# Development Best Practices
+
+```yaml
+meta:
+  context: "Global development guidelines for Agent OS projects"
+  version: 2.0
+  updated: "2025-08-06"
+```
+
+## Core Principles
+
+```yaml
+core_principles:
+  context_check:
+    implementation: |
+      # Check if Core Principles already loaded
+      if [ "$CORE_PRINCIPLES_LOADED" = "true" ]; then
+        echo "Using Core Principles already in context"
+      else
+        echo "Loading Core Principles..."
+        CORE_PRINCIPLES_LOADED=true
+      fi
+  
+  principles:
+    - id: keep_it_simple
+      name: "Keep It Simple"
+      guidelines:
+        - "Implement code in the fewest lines possible"
+        - "Avoid over-engineering solutions"
+        - "Choose straightforward approaches over clever ones"
+      priority: high
+    
+    - id: optimize_for_readability
+      name: "Optimize for Readability"
+      guidelines:
+        - "Prioritize code clarity over micro-optimizations"
+        - "Write self-documenting code with clear variable names"
+        - "Add comments for \"why\" not \"what\""
+      priority: high
+    
+    - id: dry
+      name: "DRY (Don't Repeat Yourself)"
+      guidelines:
+        - "Extract repeated business logic to private methods"
+        - "Extract repeated UI markup to reusable components"
+        - "Create utility functions for common operations"
+      priority: medium
+    
+    - id: file_structure
+      name: "File Structure"
+      guidelines:
+        - "Keep files focused on a single responsibility"
+        - "Group related functionality together"
+        - "Use consistent naming conventions"
+      priority: medium
+```
+
+## Dependencies
+
+```yaml
+dependencies:
+  context_check:
+    implementation: |
+      # Check if task involves choosing an external library
+      if [ "$TASK_TYPE" = "choosing-external-library" ]; then
+        if [ "$DEPENDENCIES_LOADED" = "true" ]; then
+          echo "Using Dependencies guidelines already in context"
+        else
+          echo "Loading Dependencies guidelines..."
+          DEPENDENCIES_LOADED=true
+        fi
+      fi
+  
+  guidelines:
+    - id: choose_libraries_wisely
+      name: "Choose Libraries Wisely"
+      description: "When adding third-party dependencies"
+      criteria:
+        - "Select the most popular and actively maintained option"
+        - "Check the library's GitHub repository for:"
+        - "  - Recent commits (within last 6 months)"
+        - "  - Active issue resolution"
+        - "  - Number of stars/downloads"
+        - "  - Clear documentation"
+      priority: high
+```
+
+## Testing Practices
+
+```yaml
+testing:
+  general_guidelines:
+    - "Write tests before implementation (TDD approach)"
+    - "Focus on testing behavior, not implementation details"
+    - "Ensure test names clearly describe what is being tested"
+    - "Test both success and failure scenarios"
+  
+  test_types:
+    - id: unit_tests
+      description: "Test individual functions and classes in isolation"
+      coverage_target: "90% of business logic"
+      
+    - id: integration_tests
+      description: "Test interactions between components"
+      coverage_target: "Key user flows and system boundaries"
+      
+    - id: e2e_tests
+      description: "Test complete user flows"
+      coverage_target: "Critical business processes"
+```
+
+## Performance Guidelines
+
+```yaml
+performance:
+  - id: early_optimization
+    guideline: "Avoid premature optimization"
+    explanation: "Focus on making it work correctly first, then optimize if necessary"
+    
+  - id: resource_management
+    guideline: "Be mindful of resource usage"
+    examples:
+      - "Clean up after operations (close files, release connections)"
+      - "Dispose of large objects when no longer needed"
+      - "Be careful with memory-intensive operations"
+    
+  - id: async_operations
+    guideline: "Use asynchronous operations for I/O-bound work"
+    examples:
+      - "Network requests should be async"
+      - "File operations should be async"
+      - "Database operations should be async"
+```
+
+## Security Best Practices
+
+```yaml
+security:
+  - id: input_validation
+    guideline: "Validate all user input"
+    explanation: "Never trust user input; always validate before processing"
+    
+  - id: authentication
+    guideline: "Implement proper authentication"
+    requirements:
+      - "Use secure password hashing (bcrypt)"
+      - "Implement proper session management"
+      - "Use secure defaults for auth libraries"
+    
+  - id: authorization
+    guideline: "Implement proper authorization"
+    requirements:
+      - "Check permissions on all protected resources"
+      - "Implement role-based access control where appropriate"
+      - "Never rely on security by obscurity"
+    
+  - id: sensitive_data
+    guideline: "Protect sensitive data"
+    requirements:
+      - "Encrypt sensitive data at rest"
+      - "Use HTTPS for all communications"
+      - "Never log sensitive information (passwords, tokens, PII)"
+```
+
+## Code Review Checklist
+
+```yaml
+code_review:
+  functional_checks:
+    - "Code works as expected and implements the requirements"
+    - "Edge cases are handled appropriately"
+    - "Error handling is implemented correctly"
+  
+  quality_checks:
+    - "Code follows the style guidelines"
+    - "No obvious bugs or logic errors"
+    - "No performance issues or inefficiencies"
+    - "Code is DRY and follows SOLID principles"
+  
+  security_checks:
+    - "No security vulnerabilities"
+    - "Input validation is implemented"
+    - "Authentication and authorization are handled correctly"
+  
+  test_checks:
+    - "Tests are written and pass"
+    - "Tests cover both positive and negative scenarios"
+    - "Tests are meaningful and test behavior"
+```
